@@ -1,97 +1,110 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# RavidTest
 
-# Getting Started
+## Demo Video
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+[![Watch the demo](https://img.youtube.com/vi/OxhTJxyEibg/0.jpg)](https://youtu.be/OxhTJxyEibg)
 
-## Step 1: Start Metro
+> Click the image above or [watch the demo here](https://youtu.be/OxhTJxyEibg)
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Installation & Build Instructions
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+### Prerequisites
+- Node.js >= 18
+- Yarn or npm
+- Xcode (for iOS development)
+- Android Studio (for Android development)
+- React Native CLI
 
-```sh
-# Using npm
-npm start
+### 1. Install dependencies
 
-# OR using Yarn
+```
+yarn install
+# or
+npm install
+```
+
+### 2. iOS Setup
+- Install CocoaPods dependencies:
+  ```
+  cd ios && pod install && cd ..
+  ```
+- Run on iOS simulator:
+  ```
+  yarn ios
+  # or
+  npm run ios
+  ```
+- To run on a real device, connect your device and select it in Xcode, or use:
+  ```
+  npx react-native run-ios --device
+  ```
+
+### 3. Android Setup
+- Start an Android emulator or connect a real device (with USB debugging enabled).
+- Run:
+  ```
+  yarn android
+  # or
+  npm run android
+  ```
+
+### 4. Start Metro Bundler (if not started automatically)
+```
 yarn start
+# or
+npm start
 ```
 
-## Step 2: Build and run your app
+## How to Run
+- **iOS:** Use a simulator or real device as above.
+- **Android:** Use an emulator or real device as above.
+- The app will hot-reload on code changes.
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+## Assumptions & Notes
+- The app uses React Native 0.80+ and React 19+.
+- All state management is handled with [zustand](https://github.com/pmndrs/zustand).
+- Local storage is handled with [react-native-mmkv](https://github.com/mrousavy/react-native-mmkv) for fast, persistent storage.
+- Form validation uses [React Hook Form](https://react-hook-form.com/) and [Yup](https://github.com/jquense/yup).
+- The Builder tab's categories and fields are persisted locally and will remain after app restarts.
+- The Profile tab is also persisted locally.
+- No backend or remote API is used; all data is local.
 
-### Android
+## Brief Design Overview
 
-```sh
-# Using npm
-npm run android
+### Architecture
+- **State Management:**
+  - Uses `zustand` for global state (categories, profile, etc.).
+  - Builder and Profile data are stored in zustand stores and persisted to MMKV.
+- **Persistence:**
+  - The `src/utils/storage.ts` file exports a singleton MMKV instance.
+  - Builder and Profile stores save and load data from MMKV using JSON serialization.
+- **Forms:**
+  - All forms use [React Hook Form](https://react-hook-form.com/) for state and validation.
+  - [Yup](https://github.com/jquense/yup) is used for schema-based validation.
+  - The Builder tab uses dynamic forms with `useFieldArray` for custom sections.
+- **UI:**
+  - Built with React Native components and [react-native-element-dropdown](https://github.com/hoaphantn7604/react-native-element-dropdown) for dropdowns.
+  - [react-native-modal-datetime-picker](https://github.com/mmazzarolo/react-native-modal-datetime-picker) for date selection.
+  - [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons) for icons.
+  - Keyboard handling is improved with `KeyboardAvoidingView`.
 
-# OR using Yarn
-yarn android
-```
+### Builder Tab
+- Users can add, edit, and remove categories (tabs).
+- Each category can be a "positions" type (with position/company/date fields) or "Custom" (with dynamic sections).
+- All changes are persisted locally using MMKV.
+- The UI updates instantly when switching between categories.
 
-### iOS
+### Profile Tab
+- Profile data is editable and validated.
+- Changes are persisted locally using MMKV.
+- Uses the same form/validation approach as Builder.
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+### Libraries Used
+- `react-hook-form`, `@hookform/resolvers`, `yup`: Form state and validation
+- `zustand`: State management
+- `react-native-mmkv`: Local storage
+- `react-native-element-dropdown`, `react-native-modal-datetime-picker`, `react-native-vector-icons`: UI components
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+---
 
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+For any issues or questions, please check the code comments or open an issue.
