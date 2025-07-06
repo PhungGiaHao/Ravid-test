@@ -2,9 +2,9 @@
 
 ## Demo Video
 
-[![Watch the demo](https://img.youtube.com/vi/OxhTJxyEibg/0.jpg)](https://youtu.be/OxhTJxyEibg)
+[![Watch the demo](https://img.youtube.com/vi/tEX1EGNO4ZQ/hqdefault.jpg)](https://www.youtube.com/watch?v=tEX1EGNO4ZQ&ab_channel=GiaH%E1%BA%A1o)
 
-> Click the image above or [watch the demo here](https://youtu.be/OxhTJxyEibg)
+> Click the image above or [watch the demo here](https://www.youtube.com/watch?v=tEX1EGNO4ZQ&ab_channel=GiaH%E1%BA%A1o)
 
 ## Installation & Build Instructions
 
